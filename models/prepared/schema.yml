@@ -1,0 +1,197 @@
+version: 2
+
+models:
+  - name: stg_audience_segments
+    description: "Transformed data of audience segments with primary key constraints."
+    columns:
+      - name: audience_segment_id
+        description: "The unique identifier for each audience segment."
+        tests:
+          - unique
+          - not_null
+
+      - name: segment_name
+        description: "The name of the audience segment."
+  - name: stg_consumers
+    description: "Transformed data for consumers with mandatory constraints."
+    columns:
+      - name: consumer_id
+        description: "The unique identifier for each consumer."
+        tests:
+          - unique
+          - not_null
+
+      - name: consumer_name
+        description: "The full name of the consumer."
+        tests:
+          - not_null
+
+      - name: consumer_email
+        description: "The email address of the consumer."
+        tests:
+          - not_null
+          - unique
+  - name: stg_interactions
+    description: "Staging model for interaction data with enforced data types and integrity."
+    columns:
+      - name: interaction_id
+        tests:
+          - unique
+          - not_null
+      - name: consumer_id
+        tests:
+          - not_null
+      - name: touchpoint_id
+        tests:
+          - not_null
+      - name: interaction_date
+        tests:
+          - not_null
+  - name: stg_inventory
+    description: "Staging model for inventory data ensuring data types and mandatory fields."
+    columns:
+      - name: inventory_id
+        tests:
+          - unique
+          - not_null
+      - name: item_id
+        tests:
+          - not_null
+      - name: quantity_on_hand
+        tests:
+          - not_null
+      - name: reorder_level
+        tests:
+          - not_null
+  - name: stg_items
+    description: "Staging model for items ensuring data types and mandatory fields are correctly processed."
+    columns:
+      - name: item_id
+        tests:
+          - unique
+          - not_null
+      - name: item_price
+        tests:
+          - not_null
+      - name: stock_quantity
+        tests:
+          - not_null
+  - name: stg_location_dimension
+    description: "Staging model for location dimensions with ensured data integrity."
+    columns:
+      - name: location_id
+        tests:
+          - unique
+          - not_null
+      - name: city
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - not_null
+  - name: stg_loyalty_activities
+    description: "Staging model for loyalty activities ensuring data integrity."
+    columns:
+      - name: loyalty_activity_id
+        tests:
+          - unique
+          - not_null
+      - name: consumer_id
+        tests:
+          - not_null
+      - name: activity_date
+        tests:
+          - not_null
+  - name: stg_media_channels
+    description: "Staging model for media channels ensuring data integrity and type correctness."
+    columns:
+      - name: media_channel_id
+        tests:
+          - unique
+          - not_null
+      - name: media_channel_name
+        tests:
+          - not_null
+  - name: stg_offers
+    description: "Staging model for offers ensuring data types and mandatory fields are correctly processed."
+    columns:
+      - name: offer_id
+        tests:
+          - unique
+          - not_null
+      - name: offer_name
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
+      - name: valid_to
+        tests:
+          - not_null
+  - name: stg_orders
+    description: "Staging model for orders ensuring data types and mandatory fields are correctly processed."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: item_id
+        tests:
+          - not_null
+      - name: supplier_id
+        tests:
+          - not_null
+      - name: order_date
+        tests:
+          - not_null
+models:
+  - name: stg_sales
+    description: "Staging model for sales data ensuring integrity and type correctness."
+    columns:
+      - name: sale_id
+        tests:
+          - unique
+          - not_null
+      - name: sale_date
+        tests:
+          - not_null
+      - name: shop_id
+        tests:
+          - not_null
+      - name: consumer_id
+        tests:
+          - not_null
+  - name: stg_shops
+    description: "Staging model for shops ensuring correct data types and mandatory fields."
+    columns:
+      - name: shop_id
+        tests:
+          - unique
+          - not_null
+      - name: shop_name
+        tests:
+          - not_null
+      - name: established_year
+        tests:
+          - not_null
+  - name: stg_suppliers
+    description: "Staging model for suppliers ensuring data types and mandatory fields are correctly processed."
+    columns:
+      - name: supplier_id
+        tests:
+          - unique
+          - not_null
+      - name: contact_email
+        tests:
+          - not_null 
+  - name: stg_touchpoints
+    description: "Staging model for touchpoints ensuring data types and mandatory fields."
+    columns:
+      - name: touchpoint_id
+        tests:
+          - unique
+          - not_null
+      - name: touchpoint_name
+        tests:
+          - not_null
+

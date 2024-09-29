@@ -1,0 +1,171 @@
+version: 2
+
+models:
+  - name: wh_fact_inventory
+    description: "Stores comprehensive details about inventory, including stock levels, reorders, and warehouse locations."
+    columns:
+      - name: inventory_id
+        description: "The unique identifier for each inventory record."
+        tests:
+          - unique
+          - not_null
+      - name: inventory_date
+        description: "The date of the inventory record."
+        tests:
+          - not_null
+      - name: item_id
+        description: "Foreign key to the item dimension, indicating which item the inventory record pertains to."
+        tests:
+          - not_null
+      - name: item_name
+        description: "Name of the item."
+      - name: category
+        description: "Category of the item."
+      - name: quantity_on_hand
+        description: "Current quantity of the item available in inventory."
+        tests:
+          - not_null
+      - name: reorder_level
+        description: "Set quantity at which a new order should be placed to replenish the inventory."
+        tests:
+          - not_null
+      - name: warehouse_location
+        description: "Specific location within the warehouse where the item is stored."
+      - name: warehouse_city
+        description: "City where the warehouse is located."
+      - name: warehouse_country
+        description: "Country where the warehouse is located."
+      - name: last_updated
+        description: "The last date the inventory record was updated."
+        tests:
+          - not_null
+
+  - name: wh_fact_interactions
+    description: "Records details about customer interactions across various touchpoints."
+    columns:
+      - name: interaction_id
+        description: "The unique identifier for each interaction."
+        tests:
+          - unique
+          - not_null
+      - name: interaction_date
+        description: "The date of the interaction."
+        tests:
+          - not_null
+      - name: consumer_id
+        description: "Foreign key to the consumer dimension, identifying the consumer involved in the interaction."
+        tests:
+          - not_null
+      - name: touchpoint_id
+        description: "Foreign key to the touchpoint dimension, identifying where the interaction occurred."
+      - name: interaction_type
+        description: "Type of interaction, such as email, phone call, in-person, etc."
+        tests:
+          - not_null
+      - name: resolution_status
+        description: "The status of the interaction, indicating whether it was resolved, pending, or unresolved."
+      - name: comments
+        description: "Any additional comments related to the interaction."
+
+  - name: wh_fact_loyalty
+    description: "Tracks all loyalty points activities, including points earned, redeemed, and balances."
+    columns:
+      - name: loyalty_activity_id
+        description: "The unique identifier for each loyalty activity."
+        tests:
+          - unique
+          - not_null
+      - name: activity_date
+        description: "The date when the loyalty activity occurred."
+        tests:
+          - not_null
+      - name: consumer_id
+        description: "Foreign key to the consumer dimension, identifying the consumer participating in the loyalty program."
+        tests:
+          - not_null
+      - name: activity_type
+        description: "Type of loyalty activity, such as points earned, points redeemed, etc."
+        tests:
+          - not_null
+      - name: points_earned
+        description: "The number of loyalty points earned during the activity."
+      - name: points_redeemed
+        description: "The number of loyalty points redeemed during the activity."
+      - name: balance_points
+        description: "Total number of loyalty points remaining after the activity."
+
+  - name: wh_dim_consumer
+    description: "Contains detailed information about consumers, including demographic and transactional data."
+    columns:
+      - name: consumer_id
+        description: "The unique identifier for each consumer."
+        tests:
+          - unique
+          - not_null
+      - name: consumer_name
+        description: "Full name of the consumer."
+        tests:
+          - not_null
+      - name: consumer_email
+        description: "Email address of the consumer."
+        tests:
+          - not_null
+      - name: consumer_city
+        description: "City where the consumer resides."
+      - name: phone_number
+        description: "Telephone number of the consumer."
+      - name: date_of_birth
+        description: "Birth date of the consumer."
+        tests:
+          - not_null
+      - name: age
+        description: "Age of the consumer, derived from the date of birth."
+      - name: total_transactions
+        description: "Total number of transactions made by the consumer."
+      - name: total_spend
+        description: "Total amount spent by the consumer."
+      - name: average_transaction_value
+        description: "Average transaction value of the consumer."
+      - name: address
+        description: "Street address of the consumer."
+      - name: loyalty_points
+        description: "Number of loyalty points accrued by the consumer."
+      - name: country
+        description: "Country where the consumer resides."
+
+  - name: wh_fact_sales
+    description: "Aggregated sales data providing a comprehensive view of all transactions."
+    columns:
+      - name: sale_id
+        description: "Unique identifier for each sale."
+        tests:
+          - unique
+          - not_null
+      - name: sales_date
+        description: "The date on which the sale occurred."
+        tests:
+          - not_null
+      - name: shop_id
+        description: "Identifier for the shop where the sale occurred."
+        tests:
+          - not_null
+      - name: consumer_id
+        description: "Identifier for the consumer involved in the sale."
+        tests:
+          - not_null
+      - name: item_id
+        description: "Identifier for the item sold."
+        tests:
+          - not_null
+      - name: total_price
+        description: "Total price paid for the transaction."
+        tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of items sold in the transaction."
+        tests:
+          - not_null
+      - name: payment_method
+        description: "Method of payment used."
+      - name: order_status
+        description: "Current status of the order."

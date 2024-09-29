@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: dbt_staged
+    tables:
+      - name: audience_segments
+      - name: campaigns
+      - name: consumers
+      - name: interactions
+      - name: inventory
+      - name: items
+      - name: location_dimension
+      - name: loyalty_activities
+      - name: media_channels
+      - name: offers
+      - name: orders
+      - name: sales
+      - name: shops
+      - name: suppliers
+      - name: touchpoints

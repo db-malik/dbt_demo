@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: mrt_offers
+    description: "Dimension table for promotional offers within the marketing department."
+    columns:
+      - name: offer_id
+        description: "Unique identifier for the promotional offer."
+        tests:
+          - unique
+          - not_null
+      - name: offer_name
+        description: "Name of the promotional offer."
+        tests:
+          - not_null
+      - name: discount
+        description: "Discount provided by the offer, either as a percentage or a fixed amount."
+        tests:
+          - not_null
+      - name: valid_from
+        description: "Start date from which the offer is valid."
+        tests:
+          - not_null
+      - name: valid_to
+        description: "End date until which the offer remains valid."
+        tests:
+          - not_null
+      - name: terms
+        description: "Terms and conditions of the offer."
+      - name: offer_code
+        description: "Code used by customers to redeem the offer."
+        tests:
+          - not_null
+      - name: max_usage
+        description: "Maximum number of times the offer can be used by a single customer."
+        tests:
+          - not_null
+      - name: country
+        description: "Country or countries where the offer is applicable."
+        tests:
+          - not_null
+
+  - name: mrt_media_channels
+    description: "Dimension table for media channels used in marketing campaigns."
+    columns:
+      - name: media_channel_id
+        description: "Unique identifier for the media channel."
+        tests:
+          - unique
+          - not_null
+      - name: media_channel_name
+        description: "Name of the media channel."
+        tests:
+          - not_null
+      - name: description
+        description: "Brief description of the media channel and its primary use or audience."
+        
+  - name: mrt_audience_segments
+    description: "Dimension table for different audience segments targeted in marketing."
+    columns:
+      - name: audience_segment_id
+        description: "Unique identifier for the audience segment."
+        tests:
+          - unique
+          - not_null
+      - name: segment_name
+        description: "Name of the audience segment."
+        tests:
+          - not_null
+      - name: description
+        description: "Detailed description of the audience segment."
