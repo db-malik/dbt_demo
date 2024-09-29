@@ -1,14 +1,24 @@
 dbt_dem:
   outputs:
     dev:
+      project: data-axe-430306-r6
       dataset: dbt_staged
-      job_execution_timeout_seconds: 300
-      job_retries: 1
+      type: bigquery
       location: europe-west1
       method: service-account
       keyfile: 'auth/perso_yr_dbt_prt.json'
       priority: interactive
-      project: data-axe-430306-r6
+      job_execution_timeout_seconds: 300
       threads: 3
+      job_retries: 1
+
+    prod:
       type: bigquery
+      project: your-gcp-project-id
+      dataset: dbt_prod
+      location: europe-west1
+      keyfile: 'auth/perso_yr_dbt_prt.json'
+      job_execution_timeout_seconds: 600
+      threads: 6
+      job_retries: 4
   target: dev
